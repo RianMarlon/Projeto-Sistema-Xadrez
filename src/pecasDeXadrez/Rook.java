@@ -16,7 +16,7 @@ public class Rook extends ChessPiece {
 	//Retornar letra referente a peça 
 	@Override
 	public String toString() {
-		return " T";
+		return "T";
 	}	
 
 }

@@ -1,6 +1,10 @@
 package aplicacao;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import xadrez.ChessPiece;
+import xadrez.ChessPosition;
 import xadrez.Color;
 
 public class UI {
@@ -29,6 +33,19 @@ public class UI {
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
+	// Ler uma posição do usuário
+	public static ChessPosition readChessPosition(Scanner sc) {
+		try {
+			String s = sc.nextLine();
+			char column = s.charAt(0);
+			int row = Integer.parseInt(s.substring(1));
+			return new ChessPosition (column, row);
+
+		} catch (RuntimeException e) {
+			throw new InputMismatchException("Erro lendo posicao de xadrez. Valores validos sao de a1 ate h8");
+		}
+	}
+
 	// Imprimir o tabuleiro
 	public static void printBoard(ChessPiece[][] pieces) {
 		// for para percorrer as linhas e as colunas
@@ -41,13 +58,13 @@ public class UI {
 			System.out.println();
 		}
 		System.out.println();
-		System.out.println("    a  b  c  d  e  f  g  h");
+		System.out.println("   a b c d e f g h");
 	}
 
 	// Não tinha peça nessa posição do tabuleiro se for nulo
 	private static void printPiece(ChessPiece piece) {
 		if (piece == null) {
-			System.out.print(" -");
+			System.out.print("-");
 		} else {
 			if (piece.getColor() == Color.WHITE) {
 				System.out.print(ANSI_WHITE + piece + ANSI_RESET);

@@ -16,7 +16,7 @@ public class King extends ChessPiece {
 	//Retornar letra referente a peça 
 	@Override
 	public String toString() {
-		return " R";
+		return "R";
 	}
 
 }
