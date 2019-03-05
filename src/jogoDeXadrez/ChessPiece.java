@@ -1,4 +1,5 @@
-//Classes peças de Xadres
+//Classes peças de Xadres que
+//extende a classe peça
 
 package jogoDeXadrez;
 
