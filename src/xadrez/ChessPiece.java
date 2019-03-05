@@ -1,7 +1,7 @@
 //Classes peças de Xadres que
 //extende a classe peça
 
-package jogoDeXadrez;
+package xadrez;
 
 import jogoDeTabuleiro.Board;
 import jogoDeTabuleiro.Piece;

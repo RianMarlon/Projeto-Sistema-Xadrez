@@ -1,8 +1,10 @@
 //Classe Torre
 
-package jogoDeXadrez;
+package pecasDeXadrez;
 
 import jogoDeTabuleiro.Board;
+import xadrez.ChessPiece;
+import xadrez.Color;
 
 public class Rook extends ChessPiece {
 

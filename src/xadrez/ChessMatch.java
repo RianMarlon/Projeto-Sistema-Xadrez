@@ -1,9 +1,10 @@
 //Classe partida de Xadrez
 
-package jogoDeXadrez;
+package xadrez;
 
 import jogoDeTabuleiro.Board;
-import jogoDeTabuleiro.Position;
+import pecasDeXadrez.King;
+import pecasDeXadrez.Rook;
 
 public class ChessMatch {
 
@@ -17,7 +18,7 @@ public class ChessMatch {
 		initialSetup();
 	}
 
-	//Retornar uma matriz de peça de xadrez
+	//Retornar uma matrix de peça de xadrez
 	//corresponde a essa partida
 	public ChessPiece[][] getPieces() {
 		//Liberar as peças do tipo ChessPiece
@@ -32,12 +33,18 @@ public class ChessMatch {
 		return mat;
 	}
 	
+	private void placeNewPiece (char column, int row, ChessPiece piece) {
+		//Passa a peça e instanciar uma ChessPosition com os dados
+		//Convertendo para a posição de matrix
+		board.placePiece(piece, new ChessPosition (column, row).toPosition());
+	}
+	
 	//Responsável por iniciar  a partida de Xadrez
 	//Colocando as peças no tabuleiro
 	private  void initialSetup () {
-		board.placePiece(new Rook (board, Color.WHITE), new Position (2, 1));
-		board.placePiece(new King (board, Color.BLACK), new Position (0, 4));
-		board.placePiece(new King (board, Color.WHITE), new Position (7, 4));
+		placeNewPiece('b', 6,  new Rook (board, Color.WHITE));
+		placeNewPiece('e', 8, new King (board, Color.BLACK));
+		placeNewPiece('e', 1, new King (board, Color.WHITE));
 	}
 
 }

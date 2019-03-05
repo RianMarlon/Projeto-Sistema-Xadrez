@@ -1,7 +1,7 @@
 package aplicacao;
 
 import jogoDeTabuleiro.Board;
-import jogoDeXadrez.ChessPiece;
+import xadrez.ChessPiece;
 
 public class UI {
 

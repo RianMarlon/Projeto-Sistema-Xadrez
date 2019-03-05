@@ -1,6 +1,6 @@
 //enum  da cor das peças
 
-package jogoDeXadrez;
+package xadrez;
 
 public enum Color {
 	BLACK, WHITE;

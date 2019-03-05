@@ -1,7 +1,7 @@
 package aplicacao;
 
 import jogoDeTabuleiro.Board;
-import jogoDeXadrez.ChessMatch;
+import xadrez.ChessMatch;
 
 public class Principal {
 
