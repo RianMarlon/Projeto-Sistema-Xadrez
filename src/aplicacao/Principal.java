@@ -18,7 +18,7 @@ public class Principal {
 		while (true) {
 			try {
 				UI.clearScreen();
-				UI.printBoard(chessMatch.getPieces());
+				UI.printMatch(chessMatch);
 				System.out.println();
 				System.out.print("Peca: ");
 				ChessPosition source = UI.readChessPosition(sc);
