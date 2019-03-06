@@ -6,7 +6,7 @@ package xadrez;
 import jogoDeTabuleiro.Board;
 import jogoDeTabuleiro.Piece;
 
-public class ChessPiece extends Piece {
+public abstract class ChessPiece extends Piece {
 
 	private Color color;
 	// contagem de movimentos
