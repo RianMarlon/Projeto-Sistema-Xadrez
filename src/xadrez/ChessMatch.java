@@ -35,6 +35,14 @@ public class ChessMatch {
 		return mat;
 	}
 	
+	//Operação para imprimir as posições possíveis
+	//A partir de uma posição de origem
+	public boolean [][] possibleMoves (ChessPosition sourcePosition){
+		Position position = sourcePosition.toPosition();
+		validateSourcePosition(position);
+		return board.piece(position).possibleMoves();
+	}
+	
 	public ChessPiece performChessMove (ChessPosition sourcePosition, ChessPosition targetPosition) {
 		Position source = sourcePosition.toPosition();
 		Position target  = targetPosition.toPosition();
@@ -81,8 +89,7 @@ public class ChessMatch {
 	//Responsável por iniciar  a partida de Xadrez
 	//Colocando as peças no tabuleiro
 	private  void initialSetup () {
-		placeNewPiece('c', 1, new Rook(board, Color.WHITE));
-        placeNewPiece('c', 2, new Rook(board, Color.WHITE));
+		placeNewPiece('c', 2, new Rook(board, Color.WHITE));
         placeNewPiece('d', 2, new Rook(board, Color.WHITE));
         placeNewPiece('e', 2, new Rook(board, Color.WHITE));
         placeNewPiece('e', 1, new Rook(board, Color.WHITE));

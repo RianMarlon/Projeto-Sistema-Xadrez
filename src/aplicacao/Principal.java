@@ -20,11 +20,14 @@ public class Principal {
 				UI.clearScreen();
 				UI.printBoard(chessMatch.getPieces());
 				System.out.println();
-				System.out.print("Souce: ");
+				System.out.print("Peca: ");
 				ChessPosition source = UI.readChessPosition(sc);
 
+				boolean[][] possibleMoves = chessMatch.possibleMoves(source);
+				UI.clearScreen();
+				UI.printBoard(chessMatch.getPieces(), possibleMoves);
 				System.out.println();
-				System.out.print("Target: ");
+				System.out.print("Destino: ");
 				ChessPosition target = UI.readChessPosition(sc);
 
 				ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
