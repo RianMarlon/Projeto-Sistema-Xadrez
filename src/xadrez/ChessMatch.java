@@ -2,6 +2,9 @@
 
 package xadrez;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jogoDeTabuleiro.Board;
 import jogoDeTabuleiro.Piece;
 import jogoDeTabuleiro.Position;
@@ -17,6 +20,11 @@ public class ChessMatch {
 	// Um tabuleiro para começar a partida
 	private Board board;
 
+	//Peças no tabuleiro
+	private List <Piece> piecesOnTheBoard = new ArrayList <>();
+	private List <Piece> capturedPieces = new ArrayList <>();
+	
+	
 	// A classe tem que saber a dimensão
 	// do tabuleiro de xadrez
 	// Começa com as peças brancas
@@ -73,6 +81,12 @@ public class ChessMatch {
 		Piece p = board.removePiece(source);
 		Piece capturedPiece = board.removePiece(target);
 		board.placePiece(p, target);
+		
+		if (capturedPiece != null) {
+			piecesOnTheBoard.remove(capturedPiece);
+			capturedPieces.add(capturedPiece);
+		}
+		
 		return capturedPiece;
 	}
 
@@ -112,6 +126,7 @@ public class ChessMatch {
 		// Passa a peça e instanciar uma ChessPosition com os dados
 		// Convertendo para a posição de matrix
 		board.placePiece(piece, new ChessPosition(column, row).toPosition());
+		piecesOnTheBoard.add(piece);
 	}
 
 	// Responsável por iniciar a partida de Xadrez

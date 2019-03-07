@@ -1,7 +1,10 @@
 package aplicacao;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import xadrez.ChessMatch;
 import xadrez.ChessPiece;
@@ -51,12 +54,14 @@ public class UI {
 			throw new InputMismatchException("Erro lendo posicao de xadrez. Valores validos sao de a1 ate h8.");
 		}
 	}
-	
-	public static void printMatch (ChessMatch chessMatch) {
+
+	public static void printMatch(ChessMatch chessMatch, List <ChessPiece> captured) {
 		printBoard(chessMatch.getPieces());
 		System.out.println();
+		printCapturedPieces(captured);
+		System.out.println();
 		System.out.println("Turno: " + chessMatch.getTurn());
-		System.out.println("Aguardando o jogador: "+ chessMatch.getCurrentPlayer());
+		System.out.println("Aguardando o jogador: " + chessMatch.getCurrentPlayer());
 	}
 
 	// Imprimir o tabuleiro
@@ -103,6 +108,22 @@ public class UI {
 			}
 		}
 		System.out.print(" ");
+	}
+
+	// Responsável por imprimir na tela a lista de peças capturadas
+	private static void printCapturedPieces(List<ChessPiece> captured) {
+		List<ChessPiece> white = captured.stream().filter(x -> x.getColor() == Color.WHITE).collect(Collectors.toList());
+		List<ChessPiece> black = captured.stream().filter(x -> x.getColor() == Color.BLACK).collect(Collectors.toList());
+		System.out.println("Pecas capturadas");
+		System.out.print("Brancas: ");
+		System.out.print(ANSI_WHITE);
+		System.out.println(Arrays.toString(white.toArray()));
+		System.out.print(ANSI_RESET);
+		System.out.print("Pretas: ");
+		System.out.print(ANSI_RED);
+		System.out.println(Arrays.toString(black.toArray()));
+		System.out.print(ANSI_RESET);
+	
 	}
 
 }
