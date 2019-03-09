@@ -11,7 +11,6 @@ public class Bishop extends ChessPiece {
 	
 	public Bishop(Board board, Color color) {
 		super(board, color);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -19,7 +18,7 @@ public class Bishop extends ChessPiece {
 		return "B";
 	}
 
-	///Movimenta-se nas diagonais
+	//Movimenta-se nas diagonais
 	@Override
 	public boolean[][] possibleMoves() {
 		boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
