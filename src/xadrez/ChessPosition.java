@@ -33,7 +33,7 @@ public class ChessPosition {
 	//Converter a posição de comum para a posição de xadrez
 	protected static ChessPosition fromPosition (Position position) {
 		//Operação inversa do método toPosition com casting para char
-		return new ChessPosition ((char)( 'a' - position.getColumn()), 8 - position.getRow());
+		return new ChessPosition ((char)( 'a' + position.getColumn()), 8 - position.getRow());
 	}
 	
 	@Override

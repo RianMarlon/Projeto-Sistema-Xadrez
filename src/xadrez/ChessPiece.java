@@ -21,6 +21,11 @@ public abstract class ChessPiece extends Piece {
 	public Color getColor() {
 		return color;
 	}
+	
+	//posição da peça
+	public ChessPosition getChessPosition () {
+		return ChessPosition.fromPosition(position);
+	}
 
 	// Verificar se não existe uma peça adversária nessa posição
 	// Testando a cor das peças
