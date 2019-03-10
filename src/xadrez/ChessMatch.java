@@ -2,6 +2,7 @@
 
 package xadrez;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,7 +28,9 @@ public class ChessMatch {
 	// Cheque: começa com false
 	private boolean check;
 	private boolean checkMate;
+	//# Jogadas especias
 	private ChessPiece enPassantVulnerable;
+	private ChessPiece promoted;
 
 	// Peças no tabuleiro
 	private List<Piece> piecesOnTheBoard = new ArrayList<>();
@@ -62,6 +65,10 @@ public class ChessMatch {
 	public ChessPiece getEnPassantVulnerable () {
 		return enPassantVulnerable;
 	}
+	
+	public ChessPiece getPromoted () {
+		return promoted;
+	}
 
 	// Retornar uma matrix de peça de xadrez
 	// corresponde a essa partida
@@ -92,14 +99,23 @@ public class ChessMatch {
 		validateSourcePosition(source);
 		validateTargetPosition(source, target);
 		Piece capturedPiece = makeMove(source, target);
-
+		
 		if (testCheck(currentPlayer)) {
 			undoMove(source, target, capturedPiece);
 			throw new ChessException("Voce nao pode se colocar em xeque");
 		}
 		
 		ChessPiece movedPiece = (ChessPiece)board.piece(target);		
-
+		
+		//Movimento especial Promoção
+		promoted = null;
+		if (movedPiece instanceof Pawn) {
+			if ((movedPiece.getColor() == Color.WHITE && target.getRow() == 0) || (movedPiece.getColor() == Color.BLACK && target.getRow() == 7)) {
+				promoted = (ChessPiece) board.piece(target);
+				promoted = replacePromotedPiece("Q");
+			}
+		}
+		
 		check = (testCheck(opponent(currentPlayer))) ? true : false;
 
 		if (testCheckMate(opponent(currentPlayer))) {
@@ -118,6 +134,32 @@ public class ChessMatch {
 		return (ChessPiece) capturedPiece;
 	}
 
+	public ChessPiece replacePromotedPiece (String type) {
+		if (promoted == null) {
+			throw new IllegalStateException("Nao ha peca para ser promovida");
+		}
+		if (!type.equals("B") && !type.equals("C") && !type.equals("Q") && !type.equals("T") ) {
+			throw new InvalidParameterException ("Tipo invalido para promocao");
+		}
+		
+		Position pos = promoted.getChessPosition().toPosition();
+		Piece  p  =board.removePiece(pos);
+		piecesOnTheBoard.remove(p);
+		
+		ChessPiece newPiece = newPiece (type, promoted.getColor());
+		board.placePiece(newPiece, pos);
+		piecesOnTheBoard.add(newPiece);
+		
+		return newPiece;
+	}
+	
+	private ChessPiece newPiece (String type, Color color) {
+		if (type.equals("B")) return new Bishop(board, color);
+		if (type.equals("C")) return new Knight(board, color);
+		if (type.equals("Q")) return new Queen(board, color);
+		return new Rook (board, color);
+	}
+	
 	// Recebe uma posição de origem e uma posição de destino
 	private Piece makeMove(Position source, Position target) {
 		ChessPiece p = (ChessPiece) board.removePiece(source);
